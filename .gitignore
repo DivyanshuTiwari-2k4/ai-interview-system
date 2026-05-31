@@ -3,7 +3,6 @@ node_modules/
 
 # Environment & secrets
 .env
-backend/src/config/env.js
 
 # Logs
 logs/
