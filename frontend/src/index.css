@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #06060d;
+    color: #e0e0eb;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0a14; }
+  ::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #00ff88; }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+  }
+
+  .signal-glow {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), 0 0 60px rgba(0, 255, 136, 0.1);
+  }
+
+  .btn-primary {
+    @apply bg-signal text-ink-950 font-display font-700 px-6 py-3 rounded-lg
+           hover:bg-signal-dim transition-all duration-200 active:scale-95;
+  }
+
+  .recording-pulse {
+    animation: recordingPulse 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes recordingPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.7); }
+  50% { box-shadow: 0 0 0 12px rgba(255, 59, 92, 0); }
+}
+
+@keyframes waveform {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+.waveform-bar {
+  animation: waveform 0.8s ease-in-out infinite;
+}
