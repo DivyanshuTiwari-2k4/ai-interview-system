@@ -25,10 +25,10 @@ import AiInterview from '../models/AiInterview.js';
 
 const TRANSCRIPTION_QUEUE_URL = process.env.TRANSCRIPTION_QUEUE_URL;
 
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  logger.info("Transcription Worker: MongoDB connected");
+export const startTranscribeWorker = async () => {
+  logger.info("Transcribe Worker: MongoDB already connected");
   startPolling();
-});
+};
 
 // ── AI Evaluation via Claude API ────────────────────────────────────────────
 

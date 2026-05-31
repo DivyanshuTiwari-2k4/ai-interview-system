@@ -69,8 +69,17 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
   logger.info(`🚀 Server running on port ${PORT}`);
+
+  // Start workers in production
+  if (process.env.NODE_ENV === 'production') {
+    const { startMergeWorker } = await import('./workers/mergeWorker.js');
+    const { startTranscribeWorker } = await import('./workers/transcribeWorker.js');
+    await startMergeWorker();
+    await startTranscribeWorker();
+    logger.info('✅ Workers started inline');
+  }
 });
 
 export { app, server };

@@ -28,11 +28,10 @@ const MERGE_QUEUE_URL = process.env.AUDIO_MERGE_QUEUE_URL;
 const POLL_INTERVAL_MS = 5000;
 
 // Connect DB
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  logger.info("Merge Worker: MongoDB connected");
+export const startMergeWorker = async () => {
+  logger.info("Merge Worker: MongoDB already connected");
   startPolling();
-});
-
+};
 const mergeChunks = async ({ sessionId, questionIndex, interviewId }) => {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), `merge_${sessionId}_q${questionIndex}_`));
 
