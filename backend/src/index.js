@@ -36,7 +36,14 @@ initSocket(server);
 connectDB();
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ 
+  origin: [
+    'http://localhost:5173',
+    'https://ai-interview-system-three.vercel.app',
+    'https://ai-interview-system-git-main-divyanshutiwari-2k4s-projects.vercel.app'
+  ], 
+  credentials: true 
+}));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(morgan("combined", { stream: { write: (msg) => logger.info(msg.trim()) } }));
